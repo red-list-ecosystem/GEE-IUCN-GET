@@ -37,7 +37,7 @@ var makeRow = function(color, name) {
 )};
 
 var title = ui.Label({
-  value: 'Legend',
+  value: 'TF1.6 Boreal, temperate and montane peat bogs',
   style: {fontWeight: 'bold',
     fontSize: '16px',
     margin: '0px 0 4px 0px'}});
