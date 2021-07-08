@@ -16,6 +16,6 @@ Map.addLayer(image, {
   bands: ['occurrence_type'],
   palette: ['red', 'yellow'],
   min: 1, max: 2
-}, 'Indicative Map', true, 0.7);
+}, EFGname + ' -- Indicative Map', true, 0.7);
 Map.add(title);
 Map.add(legend);
