@@ -1,11 +1,11 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var EFG_IM = ee.Image("users/jrferrerparis/IUCN-GET/L3_IM/M2_5");
+var EFG_IM = ee.Image("users/jrferrerparis/IUCN-GET/L3_IM/M3_7");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
 
 // name of functional group
-var EFGname = 'M2.5 Sea ice';
+var EFGname = 'M3.7 Chemosynthetic-based-ecosystems (CBE)';
 
 // create legend and title elements
 var legend=slegend.minorMajorLegend(EFGname);

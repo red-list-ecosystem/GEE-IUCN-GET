@@ -1,11 +1,11 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var EFG_IM = ee.Image("users/jrferrerparis/IUCN-GET/L3_IM/M2_5");
+var EFG_IM = ee.Image("users/jrferrerparis/IUCN-GET/L3_IM/F3_5");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
 
 // name of functional group
-var EFGname = 'M2.5 Sea ice';
+var EFGname = 'F3.5 Canals, ditches and drains';
 
 // create legend and title elements
 var legend=slegend.minorMajorLegend(EFGname);
