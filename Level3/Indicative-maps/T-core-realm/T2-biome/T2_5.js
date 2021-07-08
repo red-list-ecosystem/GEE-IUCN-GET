@@ -13,7 +13,7 @@ var title=slegend.titleLabel();
 
 // add everything to the map
 Map.addLayer(image, {
-  bands: ['b1'],
+  bands: ['occurrence_type'],
   palette: ['red', 'yellow'],
   min: 1, max: 2
 }, 'Indicative Map', true, 0.7);
