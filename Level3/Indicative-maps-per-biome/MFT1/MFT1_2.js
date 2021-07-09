@@ -31,3 +31,15 @@ var ls_mangroves_vis = {
   palette: ['0115d4'],
 };
 Map.addLayer(ls_mangroves, ls_mangroves_vis, 'Landsat Mangroves dataset (2000)', true, 0.5);
+
+
+// Global Mangrove Watch
+//var gmw2007 = ee.FeatureCollection("projects/sat-io/open-datasets/GMW/GMW_2007_v2");
+//var gmw2008 = ee.FeatureCollection("projects/sat-io/open-datasets/GMW/GMW_2008_v2");
+//var gmw2009 = ee.FeatureCollection("projects/sat-io/open-datasets/GMW/GMW_2009_v2");
+//var gmw2010 = ee.FeatureCollection("projects/sat-io/open-datasets/GMW/GMW_2010_v2");
+//var gmw2015 = ee.FeatureCollection("projects/sat-io/open-datasets/GMW/GMW_2015_v2");
+var gmw2016 = ee.FeatureCollection("projects/sat-io/open-datasets/GMW/GMW_2016_v2");
+//var gmw1996 = ee.FeatureCollection("projects/sat-io/open-datasets/GMW/GMW_1996_v2");
+Map.addLayer(ee.Image().paint(gmw2016,0,3), {"palette":["228B22"]}, 'Global Mangrove Watch 2015', true, 0.5)
+
