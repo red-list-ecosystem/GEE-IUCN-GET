@@ -19,3 +19,8 @@ Map.addLayer(EFG_IM, {
 }, EFGname + ' -- Indicative Map', true, 0.7);
 Map.add(title);
 Map.add(legend);
+
+//
+
+// GLIMS database
+var glims = ee.FeatureCollection("GLIMS/current");
