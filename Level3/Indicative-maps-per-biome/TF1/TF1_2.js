@@ -1,11 +1,11 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var EFG_IM = ee.Image("users/jrferrerparis/IUCN-GET/L3_IM/TF1_6");
+var EFG_IM = ee.Image("users/jrferrerparis/IUCN-GET/L3_IM/TF1_2");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
 
 // name of functional group
-var EFGname = 'TF1.6 Boreal, temperate and montane peat bogs';
+var EFGname = 'TF1.2 Subtropical/temperate forested wetlands';
 
 // create legend and title elements
 var legend=slegend.minorMajorLegend(EFGname);
