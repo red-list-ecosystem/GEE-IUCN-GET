@@ -19,3 +19,15 @@ Map.addLayer(EFG_IM, {
 }, EFGname + ' -- Indicative Map', true, 0.7);
 Map.add(title);
 Map.add(legend);
+
+// Set up initial location for comparison of datasets
+Map.setCenter(-64, 10.5, 7);
+
+// Alternative datasets in earth engine collection:
+var ls_mangroves = ee.ImageCollection('LANDSAT/MANGROVE_FORESTS');
+var ls_mangroves_vis = {
+  min: 0,
+  max: 1.0,
+  palette: ['0115d4'],
+};
+Map.addLayer(ls_mangroves, ls_mangroves_vis, 'Landsat Mangroves dataset (2000)', true, 0.5);

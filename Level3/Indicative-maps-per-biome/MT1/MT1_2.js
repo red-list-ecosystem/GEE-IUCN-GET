@@ -19,3 +19,20 @@ Map.addLayer(EFG_IM, {
 }, EFGname + ' -- Indicative Map', true, 0.7);
 Map.add(title);
 Map.add(legend);
+
+// Set up initial location for comparison of datasets
+Map.setCenter(-64, 10.5, 7);
+
+// Alternative datasets in earth engine collection:
+
+//Murray Global Intertidal Change Dataset
+var intertidal = ee.ImageCollection('UQ/murray/Intertidal/v1_1/global_intertidal');
+
+var intertidal_visualization = {
+  bands: ['classification'],
+  min: 0.0,
+  max: 1.0,
+  palette: ['0000FF']
+};
+
+Map.addLayer(intertidal, intertidal_visualization, 'Murray -- Intertidal areas',false, 0.5);
