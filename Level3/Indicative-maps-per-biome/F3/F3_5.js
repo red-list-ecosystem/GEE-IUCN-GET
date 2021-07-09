@@ -19,3 +19,11 @@ Map.addLayer(EFG_IM, {
 }, EFGname + ' -- Indicative Map', true, 0.7);
 Map.add(title);
 Map.add(legend);
+
+//
+// Global irrigation areas
+var irrigation_maps = ee.ImageCollection("users/deepakna/global_irrigation_maps");
+// +-> for individual years
+var highly_irrigated_areas_2001 = ee.Image("users/deepakna/global_irrigation_maps/2001")
+  .expression("b(0) == 2 ? 1 : 0");
+Map.addLayer(highly_irrigated_areas_2001.updateMask(highly_irrigated_areas_2001.neq(0),true,0.5)
