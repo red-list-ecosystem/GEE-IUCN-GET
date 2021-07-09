@@ -27,7 +27,7 @@ var ecoRegions = ee.FeatureCollection("RESOLVE/ECOREGIONS/2017");
 
 // x-walk of ecoregion ids
 var xwalk = ee.FeatureCollection("users/jrferrerparis/IUCN-GET/L3_IM/xwalk_teow")
-var slc = xwalk.filter(ee.Filter.eq('efg_code','EFG_code'));
+var slc = xwalk.filter(ee.Filter.eq('efg_code','T4.2'));
 // Map the function over the features.
 var xw_major = slc.filter(ee.Filter.equals('occurrence',1)).aggregate_array('eco_id');
 var xw_minor = slc.filter(ee.Filter.equals('occurrence',2)).aggregate_array('eco_id');
