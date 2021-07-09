@@ -19,3 +19,12 @@ Map.addLayer(EFG_IM, {
 }, EFGname + ' -- Indicative Map', true, 0.7);
 Map.add(title);
 Map.add(legend);
+
+//
+
+// Global river deltas dataset:
+var convex_hull = ee.FeatureCollection("projects/sat-io/open-datasets/delta/delta-convex-hull");
+var convex_hull_bound = ee.FeatureCollection("projects/sat-io/open-datasets/delta/delta-convex-bounds");
+Map.addLayer(ee.FeatureCollection(convex_hull),{},'Delta Convex Hull', false, 0.5);
+Map.addLayer(ee.FeatureCollection(convex_hull_bound),{},'Delta Convex Hull Bounds', true, 0.5);
+
