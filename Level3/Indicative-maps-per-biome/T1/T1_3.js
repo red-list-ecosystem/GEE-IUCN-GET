@@ -19,3 +19,9 @@ Map.addLayer(EFG_IM, {
 }, EFGname + ' -- Indicative Map', true, 0.7);
 Map.add(title);
 Map.add(legend);
+
+//
+// Global 1-km Cloud Cover : dataset not longer available?
+//var cloud_forest_prediction = ee.Image("projects/sat-io/open-datasets/gcc/MODCF_CloudForestPrediction");
+
+
