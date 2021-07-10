@@ -27,5 +27,5 @@ var cloud_forest_pred = ee.Image("projects/sat-io/open-datasets/gcc/MODCF_CloudF
 Map.addLayer(cloud_forest_pred, {
   bands: ['b1'],
   palette: ['white', 'purple'],
-  min: 0, max: 0.00077
+  min: 0.0001, max: 0.00077
 }, 'Cloud Forest prediction', true, 0.7);
