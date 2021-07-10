@@ -27,9 +27,11 @@ Map.add(legend);
 // OpenLandMap Potential distribution of biomes
 // https://developers.google.com/earth-engine/datasets/catalog/OpenLandMap_PNV_PNV_BIOME-TYPE_BIOME00K_C_v01
 
-var dataset = ee.Image("OpenLandMap/PNV/PNV_BIOME-TYPE_BIOME00K_C/v01");
+var pot_biome = ee.Image("OpenLandMap/PNV/PNV_BIOME-TYPE_BIOME00K_C/v01");
 
-var visualization = {
+var slc_biome = pot_biome.updateMask(pot_biome.eq(7));
+
+var biome_viz = {
   bands: ['biome_type'],
   min: 1.0,
   max: 32.0,
@@ -41,6 +43,6 @@ var visualization = {
   ]
 };
 
-Map.centerObject(dataset);
+Map.centerObject(slc_biome);
 
-Map.addLayer(dataset, visualization, "Potential distribution of biomes", false, 0.5);
+Map.addLayer(slc_biome, biome_viz, "Potential distribution of biomes", false, 0.5);
