@@ -34,5 +34,5 @@ var forestCanopyHeightVis = {
     '004c00', '011301'
   ],
 };
-Map.setCenter(150, -28.5, 5);
-Map.addLayer(forestCanopyHeight, forestCanopyHeightVis, 'Forest Canopy Height');
+Map.setCenter(150, -32, 5);
+Map.addLayer(forestCanopyHeight, forestCanopyHeightVis, 'Forest Canopy Height',true,0.5);
