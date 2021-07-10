@@ -19,3 +19,20 @@ Map.addLayer(EFG_IM, {
 }, EFGname + ' -- Indicative Map', true, 0.7);
 Map.add(title);
 Map.add(legend);
+
+//
+// Global forest canopy height 2005
+
+var dataset = ee.Image('NASA/JPL/global_forest_canopy_height_2005');
+var forestCanopyHeight = dataset.select('1');
+
+var forestCanopyHeightVis = {
+  min: 0.0,
+  max: 30.0,
+  palette: [
+    'ffffff', 'fcd163', '99b718', '66a000', '3e8601', '207401', '056201',
+    '004c00', '011301'
+  ],
+};
+Map.setCenter(150, -28.5, 5);
+Map.addLayer(forestCanopyHeight, forestCanopyHeightVis, 'Forest Canopy Height');
