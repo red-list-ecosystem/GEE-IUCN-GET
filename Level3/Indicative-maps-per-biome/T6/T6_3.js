@@ -22,6 +22,7 @@ Map.add(legend);
 
 
 // OpenLandMap Potential distribution of biomes
+// https://developers.google.com/earth-engine/datasets/catalog/OpenLandMap_PNV_PNV_BIOME-TYPE_BIOME00K_C_v01
 
 var dataset = ee.Image("OpenLandMap/PNV/PNV_BIOME-TYPE_BIOME00K_C/v01");
 
