@@ -22,6 +22,10 @@ Map.add(legend);
 
 //
 // Global 1-km Cloud Cover : dataset not longer available?
-//var cloud_forest_prediction = ee.Image("projects/sat-io/open-datasets/gcc/MODCF_CloudForestPrediction");
+var cloud_forest_pred = ee.Image("projects/sat-io/open-datasets/gcc/MODCF_CloudForestPrediction");
 
-
+Map.addLayer(cloud_forest_pred, {
+  bands: ['b1'],
+  palette: ['white', 'purple'],
+  min: 0, max: 0.00077
+}, 'Cloud Forest prediction', true, 0.7);
