@@ -38,7 +38,7 @@ var count=filteredTable.size();
 print('How many EFGs at this location: ', count);
 print('List of EFGs at this location:', filteredTable);
 
-// -- Create a geometry of Caracas (Venezuela's capital)
+// -- Create a geometry for Venezuela's capital
 var geomCaracas = ee.Geometry.Rectangle([-67.062383, 10.558489, -66.667078, 10.364908]);
 
 var reductionTable = indMaps.map(function(img) {
@@ -48,7 +48,7 @@ var reductionTable = indMaps.map(function(img) {
   //ee.Algorithms.If(stats.size().g, trueCase, falseCase)
   return ee.Feature(null,stats);
 });
-// this does not work
+// filter non-empty results
 var filteredTable=reductionTable.filter(ee.Filter.notNull(['occurrence_type']));
 
 var count=filteredTable.size();
