@@ -1,12 +1,12 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var EFG_IM = ee.Image("users/jrferrerparis/IUCN-GET/L3_IM/FM1_1");
+var indMaps = ee.ImageCollection('users/jrferrerparis/IUCN-GET/L3_IndMaps');
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
 
 // name of functional group
 var EFGname = 'FM1.1 Deepwater coastal inlets';
-
+var EFG_IM = indMaps.filter(ee.Filter.equals("title", EFGname))
 // create legend and title elements
 var legend=slegend.minorMajorLegend(EFGname);
 var title=slegend.titleLabel();
