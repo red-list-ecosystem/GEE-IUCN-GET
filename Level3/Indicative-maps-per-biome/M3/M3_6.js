@@ -1,11 +1,12 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var EFG_IM = ee.Image("users/jrferrerparis/IUCN-GET/L3_IM/M3_6");
+var indMaps = ee.ImageCollection('users/jrferrerparis/IUCN-GET/L3_IndMaps');
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
 
 // name of functional group
 var EFGname = 'M3.6 Hadal trenches and troughs';
+var EFG_IM = indMaps.filter(ee.Filter.equals("title", EFGname))
 
 // create legend and title elements
 var legend=slegend.minorMajorLegend(EFGname);
