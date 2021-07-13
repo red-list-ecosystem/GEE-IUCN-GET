@@ -11,7 +11,7 @@ print('All names: ', names);
 // example how to extract one EFG:
 var EFGshortname = 'M1.6 Subtidal rocky reefs';
 var EFG = indMaps.filter(ee.Filter.equals('title', EFGshortname));
-print(EFG);
+
 Map.addLayer(EFG, {
   bands: ['occurrence_type'],
   palette: ['red', 'yellow'],
@@ -26,13 +26,13 @@ var geometry = ee.Geometry.Point([-69.679, 9.479]);
 var reductionTable = indMaps.map(function(img) {
   var stats = ee.Dictionary(img.reduceRegion(
       {reducer: ee.Reducer.first(), geometry: geometry, scale: 250}));
-  var row = ee.Number(stats.get('occurrence_type'));
-  return ee.Feature(null, {row: row});
+  //var row = ee.Number(stats.get('occurrence_type'));
+  //return ee.Feature(null, {'occ':row});
+  return ee.Feature(null, stats);
 });
-
-// this works for a single point
-var filteredTable=reductionTable.filter(ee.Filter.notNull('occurrence'));
-print(filteredTable);
+// query a a single point
+var filteredTable=reductionTable.filter(ee.Filter.notNull(['occurrence_type']));
+print('EFGs at point location:', filteredTable);
 
 // -- Create a geometry of Caracas (Venezuela's capital)
 var geomCaracas = ee.Geometry.Rectangle([-67.062383, 10.558489, -66.667078, 10.364908]);
@@ -44,6 +44,6 @@ var reductionTable = indMaps.map(function(img) {
   //ee.Algorithms.If(stats.size().g, trueCase, falseCase)
   return ee.Feature(null,stats);
 });
-print(reductionTable);
 // this does not work
-var filteredTable=reductionTable.filter(ee.Filter.notNull('occurrence_type'));
+var filteredTable=reductionTable.filter(ee.Filter.notNull(['occurrence_type']));
+print('EFGs at selected region:', filteredTable);
