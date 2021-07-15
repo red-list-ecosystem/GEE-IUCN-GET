@@ -6,7 +6,7 @@ var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
 
 // name of functional group
 var EFGname = 'T7.4 Urban and industrial ecosystems';
-var EFG_IM = indMaps.filter(ee.Filter.equals("title", EFGname))
+var EFG_IM = indMaps.filter(ee.Filter.equals("title", EFGname));
 
 // create legend and title elements
 var legend=slegend.minorMajorLegend(EFGname);
@@ -20,6 +20,11 @@ Map.addLayer(EFG_IM, {
 }, EFGname + ' -- Indicative Map', true, 0.7);
 Map.add(title);
 Map.add(legend);
+
+// define map center
+// Map.setCenter(114.96, 31.13, 4); // China
+// Map.setCenter(-74.7, 40.6, 7);
+Map.setCenter(-107.62, 25.8, 7); // Mexico
 
 // alternative data sources
 
@@ -40,7 +45,6 @@ var visualization = {
   ]
 };
 
-Map.setCenter(-107.62, 25.8, 7);
 
 Map.addLayer(dataset, visualization, "FROM-GLC Change year index",false,0.5);
 
@@ -57,7 +61,6 @@ var visualization = {
   ]
 };
 
-Map.setCenter(-74.7, 40.6, 7);
 
 Map.addLayer(dataset, visualization, "Daytime Urban Heat Islands",false,0.5);
 
@@ -72,5 +75,21 @@ var visParams = {
   max: 3.0,
   palette: ['000000', '448564', '70daa4', 'ffffff'],
 };
-Map.setCenter(114.96, 31.13, 4);
 Map.addLayer(degreeOfUrbanization, visParams, 'GHSL Degree of Urbanization',false,0.5);
+
+//Copernicus global landcover
+var dataset = ee.Image("COPERNICUS/Landcover/100m/Proba-V-C3/Global/2019")
+.select('discrete_classification'); // urban cover fraction
+
+
+Map.addLayer(dataset, {}, "COPERNICUS Land Cover",false,0.5);
+
+var dataset = ee.Image("COPERNICUS/Landcover/100m/Proba-V-C3/Global/2019")
+.select('urban-coverfraction'); // urban cover fraction
+
+var visParams = {
+  min: 0.0,
+  max: 100.0,
+  palette: ['000000', '448564', '70daa4', 'ffffff'],
+};
+Map.addLayer(dataset, visParams, "COPERNICUS Urban cover fraction",false,0.5);
