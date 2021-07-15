@@ -93,3 +93,38 @@ var visParams = {
   palette: ['000000', '448564', '70daa4', 'ffffff'],
 };
 Map.addLayer(dataset, visParams, "COPERNICUS Urban cover fraction",false,0.5);
+
+// ESRI 2020 landcover 10m
+var esri_lulc10 = ee.ImageCollection("projects/sat-io/open-datasets/landcover/ESRI_Global-LULC_10m");
+
+// need to extract values for urban (6) 
+//probably map the mask function for each image in the collection?
+//var esri_urban = esri_lulc10.updateMask(esri_lulc10.gte(7));
+
+var dict = {
+  "names": [
+    "Water",
+    "Trees",
+    "Grass",
+    "Flooded Vegetation",
+    "Crops",
+    "Scrub/Shrub",
+    "Built Area",
+    "Bare Ground",
+    "Snow/Ice",
+    "Clouds"
+  ],
+  "colors": [
+    "#1A5BAB",
+    "#358221",
+    "#A7D282",
+    "#87D19E",
+    "#FFDB5C",
+    "#EECFA8",
+    "#ED022A",
+    "#EDE9E4",
+    "#F2FAFF",
+    "#C8C8C8"
+  ]};
+
+Map.addLayer(esri_lulc10.mosaic(), {min:1, max:10, palette:dict['colors']}, 'ESRI LULC 10m',false,0.5)
