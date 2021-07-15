@@ -20,3 +20,17 @@ Map.addLayer(EFG_IM, {
 }, EFGname + ' -- Indicative Map', true, 0.7);
 Map.add(title);
 Map.add(legend);
+
+// Alternative data sources
+
+//Copernicus global landcover
+
+var dataset = ee.Image("COPERNICUS/Landcover/100m/Proba-V-C3/Global/2019")
+.select('crops-coverfraction'); // crops cover fraction
+var copernicus_crops=dataset.updateMask(dataset.gt(0)
+var visParams = {
+  min: 0.0,
+  max: 100.0,
+  palette: ['000000', '448564', '70daa4', 'ffffff'],
+};
+Map.addLayer(dataset, visParams, "COPERNICUS Crops cover fraction",false,0.5);
