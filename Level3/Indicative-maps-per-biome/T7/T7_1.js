@@ -1,5 +1,5 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var indMaps = ee.ImageCollection('users/jrferrerparis/IUCN-GET/L3_IndMaps');
+var indMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_IndMaps");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
@@ -27,10 +27,10 @@ Map.add(legend);
 
 var dataset = ee.Image("COPERNICUS/Landcover/100m/Proba-V-C3/Global/2019")
 .select('crops-coverfraction'); // crops cover fraction
-var copernicus_crops=dataset.updateMask(dataset.gt(0)
+var copernicus_crops=dataset.updateMask(dataset.gt(5.0));
 var visParams = {
   min: 0.0,
   max: 100.0,
-  palette: ['000000', '448564', '70daa4', 'ffffff'],
+  palette: ['white', 'yellow', 'red'],
 };
-Map.addLayer(dataset, visParams, "COPERNICUS Crops cover fraction",false,0.5);
+Map.addLayer(copernicus_crops, visParams, "COPERNICUS Crops cover fraction",false,0.5);
