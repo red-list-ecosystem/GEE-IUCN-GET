@@ -40,6 +40,37 @@ var visualization = {
   ]
 };
 
-Map.setCenter(-37.62, 25.8, 2);
+Map.setCenter(-107.62, 25.8, 7);
 
 Map.addLayer(dataset, visualization, "FROM-GLC Change year index",false,0.5);
+
+// YCEO Surface Urban Heat Islands
+var dataset = ee.ImageCollection("YALE/YCEO/UHI/UHI_yearly_averaged/v4");
+
+var visualization = {
+  bands: ['Daytime'],
+  min: -1.5,
+  max: 7.5,
+  palette: [
+    "#313695","#74add1","#fed976","#feb24c","#fd8d3c","#fc4e2a",
+    "#e31a1c","#b10026",
+  ]
+};
+
+Map.setCenter(-74.7, 40.6, 7);
+
+Map.addLayer(dataset, visualization, "Daytime Urban Heat Islands",false,0.5);
+
+
+// GHSL degree of urbanization
+
+var dataset = ee.ImageCollection('JRC/GHSL/P2016/SMOD_POP_GLOBE_V1')
+                  .filter(ee.Filter.date('2015-01-01', '2015-12-31'));
+var degreeOfUrbanization = dataset.select('smod_code');
+var visParams = {
+  min: 0.0,
+  max: 3.0,
+  palette: ['000000', '448564', '70daa4', 'ffffff'],
+};
+Map.setCenter(114.96, 31.13, 4);
+Map.addLayer(degreeOfUrbanization, visParams, 'GHSL Degree of Urbanization',false,0.5);
