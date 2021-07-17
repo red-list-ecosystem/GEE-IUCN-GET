@@ -30,3 +30,5 @@ var convex_hull_bound = ee.FeatureCollection("projects/sat-io/open-datasets/delt
 Map.addLayer(ee.FeatureCollection(convex_hull),{},'Delta Convex Hull', false, 0.5);
 Map.addLayer(ee.FeatureCollection(convex_hull_bound),{},'Delta Convex Hull Bounds', true, 0.5);
 
+// 100 Max Deltas
+Map.addLayer(MaxDeltas,{},'Max 100 Deltas', true, 0.5)
