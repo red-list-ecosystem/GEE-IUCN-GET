@@ -25,10 +25,10 @@ Map.add(legend);
 
 var F3_1_alt = ee.Image("users/jrferrerparis/IUCN-GET/F3_1_alt");
 Map.addLayer(F3_1_alt, {palette: ['red', 'yellow'], min: 1, max: 2
-}, EFGname + ' -- alt map', true, 0.7);
+}, EFGname + ' -- alt map', false, 0.7);
 
 // Add alternative datasets in earth engine collection below.
 
 // GOODD database of dams
 var GOODD = ee.FeatureCollection("users/jrferrerparis/thirdparty/GOOD2_dams");
-Map.addLayer(GOODD);
+Map.addLayer(GOODD,{},'GOOD2',false,1.0);
