@@ -1,5 +1,6 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var indMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_IndMaps");
+var altMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_WM_nwt");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
@@ -23,8 +24,8 @@ Map.add(legend);
 
 //
 
-var F3_1_alt = ee.Image("users/jrferrerparis/IUCN-GET/F3_1_alt");
-Map.addLayer(F3_1_alt, {palette: ['red', 'yellow'], min: 1, max: 2
+var EFG_alt = altMaps.filter(ee.Filter.equals("title", EFGname));
+Map.addLayer(EFG_alt, {palette: ['red', 'yellow'], min: 1, max: 2
 }, EFGname + ' -- alt map', false, 0.7);
 
 // Add alternative datasets in earth engine collection below.
