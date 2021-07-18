@@ -1,5 +1,6 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var indMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_IndMaps");
+var indMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_IndMaps"),
+    altMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_WM_nwt");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
@@ -20,6 +21,11 @@ Map.addLayer(EFG_IM, {
 }, EFGname + ' -- Indicative Map', true, 0.7);
 Map.add(title);
 Map.add(legend);
+
+// Alternative version (in preparation):
+var EFG_alt = altMaps.filter(ee.Filter.equals("title", EFGname));
+Map.addLayer(EFG_alt, {palette: ['red', 'yellow'], min: 1, max: 2
+}, EFGname + ' -- alt map', false, 0.7);
 
 // define map center
 // Map.setCenter(114.96, 31.13, 4); // China
@@ -97,7 +103,7 @@ Map.addLayer(dataset, visParams, "COPERNICUS Urban cover fraction",false,0.5);
 // ESRI 2020 landcover 10m
 var esri_lulc10 = ee.ImageCollection("projects/sat-io/open-datasets/landcover/ESRI_Global-LULC_10m");
 
-// need to extract values for urban (6) 
+// need to extract values for urban (6)
 //probably map the mask function for each image in the collection?
 //var esri_urban = esri_lulc10.updateMask(esri_lulc10.gte(7));
 

@@ -20,8 +20,7 @@ Map.addLayer(EFG_IM, {
 Map.add(title);
 Map.add(legend);
 
-//
-
+// Alternative version (in preparation):
 var EFG_alt = altMaps.filter(ee.Filter.equals("title", EFGname));
 Map.addLayer(EFG_alt, {palette: ['red', 'yellow'], min: 1, max: 2
 }, EFGname + ' -- alt map', false, 0.7);

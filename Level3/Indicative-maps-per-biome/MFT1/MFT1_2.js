@@ -1,5 +1,6 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var indMaps = ee.ImageCollection('users/jrferrerparis/IUCN-GET/L3_IndMaps');
+var indMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_IndMaps"),
+    altMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_WM_nwt");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
@@ -20,6 +21,12 @@ Map.addLayer(EFG_IM, {
 }, EFGname + ' -- Indicative Map', true, 0.7);
 Map.add(title);
 Map.add(legend);
+
+
+// Alternative version (in preparation):
+var EFG_alt = altMaps.filter(ee.Filter.equals("title", EFGname));
+Map.addLayer(EFG_alt, {palette: ['red', 'yellow'], min: 1, max: 2
+}, EFGname + ' -- alt map', false, 0.7);
 
 // Set up initial location for comparison of datasets
 Map.setCenter(-64, 10.5, 7);
@@ -43,4 +50,3 @@ Map.addLayer(ls_mangroves, ls_mangroves_vis, 'Landsat Mangroves dataset (2000)',
 var gmw2016 = ee.FeatureCollection("projects/sat-io/open-datasets/GMW/GMW_2016_v2");
 //var gmw1996 = ee.FeatureCollection("projects/sat-io/open-datasets/GMW/GMW_1996_v2");
 Map.addLayer(ee.Image().paint(gmw2016,0,3), {"palette":["228B22"]}, 'Global Mangrove Watch 2015', true, 0.5)
-
