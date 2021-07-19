@@ -1,5 +1,5 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var indMaps = ee.ImageCollection('users/jrferrerparis/IUCN-GET/L3_IndMaps');
+var indMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_IndMaps");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
@@ -60,7 +60,17 @@ Map.addLayer(es_crops, cropVis, 'Earthstats crops',false,0.5);
 Map.addLayer(es_past, pastVis, 'Earthstats pastures',false,0.5);
 
 //Gridded Lifestock of the World v3
-var GLW3_cattle = ee.Image('users/jrferrerparis/thirdparty/GLW3_Cattle_2010_Da');
-var GLW3_sheep = ee.Image('users/jrferrerparis/thirdparty/GLW3_Cattle_2010_Da');
-Map.addLayer(GLW3_cattle, {}, 'GLW v3 cattle',false,0.5);
-Map.addLayer(GLW3_sheep, {}, 'GLW v3 sheep',false,0.5);
+var GLWvis = {
+  min: 0.0,
+  max: 5000.0,
+  palette: [
+    'white', 'orange','brown'
+  ],
+};
+var GLW3_1 = ee.Image('users/jrferrerparis/thirdparty/GLW3_Cattle_2010_Da');
+var GLW3_2 = ee.Image('users/jrferrerparis/thirdparty/GLW3_Sh_2010_Da');
+var GLW3_cattle=GLW3_1.updateMask(GLW3_1.gt(5));
+var GLW3_sheep=GLW3_2.updateMask(GLW3_2.gt(5));
+
+Map.addLayer(GLW3_cattle, GLWvis, 'GLW v3 cattle',false,0.5);
+Map.addLayer(GLW3_sheep, GLWvis, 'GLW v3 sheep',false,0.5);
