@@ -35,6 +35,8 @@ var visParams = {
 };
 Map.addLayer(copernicus_crops, visParams, "COPERNICUS Crops cover fraction",false,0.5);
 
+// this version is deprecated, but have not found the current one
+// 30m layer available in croplands.org
 var dataset = ee.Image('USGS/GFSAD1000_V0');
 var cropDominance = dataset.select('landcover').updateMask(dataset.gt(0));
 
@@ -48,7 +50,7 @@ var cropDominanceVis = {
 };
 Map.addLayer(cropDominance, cropDominanceVis, 'Crop Dominance',false,0.5);
 
-//Earthstats 5m resolution: 
+//Earthstats 5min resolution:
 //From http://www.earthstat.org/cropland-pasture-area-2000/
 
 var earthstats1 = ee.Image('users/jrferrerparis/thirdparty/earthstats_Cropland2000_5m');
@@ -71,7 +73,3 @@ var es_crops=earthstats1.updateMask(earthstats1.gt(0.05));
 var es_past=earthstats2.updateMask(earthstats2.gt(0.05));
 Map.addLayer(es_crops, cropVis, 'Earthstats crops',false,0.5);
 Map.addLayer(es_past, pastVis, 'Earthstats pastures',false,0.5);
-
-//Gridded Lifestock of the World v3 
-var GLW3_cattle = ee.Image('users/jrferrerparis/thirdparty/GLW3_Cattle_2010_Da');
-var GLW3_sheep = ee.Image('users/jrferrerparis/thirdparty/GLW3_Cattle_2010_Da');
