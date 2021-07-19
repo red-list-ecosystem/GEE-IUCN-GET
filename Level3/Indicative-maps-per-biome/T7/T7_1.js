@@ -47,3 +47,27 @@ var cropDominanceVis = {
   ],
 };
 Map.addLayer(cropDominance, cropDominanceVis, 'Crop Dominance',false,0.5);
+
+//Earthstats 5m resolution: 
+//From http://www.earthstat.org/cropland-pasture-area-2000/
+
+var earthstats1 = ee.Image('users/jrferrerparis/thirdparty/earthstats_Cropland2000_5m');
+var earthstats2 = ee.Image('users/jrferrerparis/thirdparty/earthstats_Pasture2000_5m');
+var cropVis = {
+  min: 0.0,
+  max: 1.0,
+  palette: [
+    'white', 'cyan', 'blue', 'purple'
+  ],
+};
+var pastVis = {
+  min: 0.0,
+  max: 1.0,
+  palette: [
+    'white', 'pink','magenta'
+  ],
+};
+var es_crops=earthstats1.updateMask(earthstats1.gt(0.05));
+var es_past=earthstats2.updateMask(earthstats2.gt(0.05));
+Map.addLayer(es_crops, cropVis, 'Earthstats crops',false,0.5);
+Map.addLayer(es_past, pastVis, 'Earthstats pastures',false,0.5);
