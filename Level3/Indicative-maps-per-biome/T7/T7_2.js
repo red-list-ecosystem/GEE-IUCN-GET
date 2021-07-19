@@ -74,3 +74,14 @@ var GLW3_sheep=GLW3_2.updateMask(GLW3_2.gt(5));
 
 Map.addLayer(GLW3_cattle, GLWvis, 'GLW v3 cattle',false,0.5);
 Map.addLayer(GLW3_sheep, GLWvis, 'GLW v3 sheep',false,0.5);
+
+//HANPP from Haberl et al.
+var NPPvis = {
+  min: -300.0,
+  max: 1000.0,
+  palette: [
+    'green', 'grey', 'yellow','orange','red','brown'
+  ],
+};
+var HANPP = ee.Image('users/jrferrerparis/thirdparty/HANPP');
+Map.addLayer(HANPP, NPPvis, 'HANPP',true,0.5);
