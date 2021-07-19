@@ -31,6 +31,19 @@ var copernicus_crops=dataset.updateMask(dataset.gt(5.0));
 var visParams = {
   min: 0.0,
   max: 100.0,
-  palette: ['white', 'yellow', 'red'],
+  palette: ['yellow', 'orange', 'red'],
 };
 Map.addLayer(copernicus_crops, visParams, "COPERNICUS Crops cover fraction",false,0.5);
+
+var dataset = ee.Image('USGS/GFSAD1000_V0');
+var cropDominance = dataset.select('landcover').updateMask(dataset.gt(0));
+
+var cropDominanceVis = {
+  min: 0.0,
+  max: 9.0,
+  palette: [
+    'black', 'white', 'green', 'yellow', 'brown', 'orange', '02be11', '015e08',
+    '02a50f', 'purple'
+  ],
+};
+Map.addLayer(cropDominance, cropDominanceVis, 'Crop Dominance',false,0.5);
