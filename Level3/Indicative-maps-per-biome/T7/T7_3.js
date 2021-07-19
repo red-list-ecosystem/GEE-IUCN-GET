@@ -1,5 +1,5 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var indMaps = ee.ImageCollection('users/jrferrerparis/IUCN-GET/L3_IndMaps');
+var indMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_IndMaps");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
@@ -46,5 +46,4 @@ mask = mask.where(mask.eq(0), 0.6);
 
 // Display the data on the map.
 Map.addLayer(mosaic.updateMask(mask),
-             classificationVis, 'Oil palm plantation type', true);
-Map.setCenter(-3.0175, 5.2745,12);
+             classificationVis, 'Oil palm plantation type', false);
