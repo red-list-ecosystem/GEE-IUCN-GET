@@ -32,14 +32,14 @@ var copernicus_crops=dataset.updateMask(dataset.gt(5.0));
 //From http://www.earthstat.org/cropland-pasture-area-2000/
 var earthstats1 = ee.Image('users/jrferrerparis/thirdparty/earthstats_Cropland2000_5m');
 var earthstats2 = ee.Image('users/jrferrerparis/thirdparty/earthstats_Pasture2000_5m');
-var es_crops=earthstats1.updateMask(earthstats1.gt(0.05));
-var es_past=earthstats2.updateMask(earthstats2.gt(0.05));
+var es_crops=earthstats1; //.updateMask(earthstats1.gt(0.05));
+var es_past=earthstats2; //.updateMask(earthstats2.gt(0.05));
 
 //Gridded Lifestock of the World v3
 var GLW3_1 = ee.Image('users/jrferrerparis/thirdparty/GLW3_Cattle_2010_Da');
 var GLW3_2 = ee.Image('users/jrferrerparis/thirdparty/GLW3_Sh_2010_Da');
-var GLW3_cattle=GLW3_1.updateMask(GLW3_1.gt(5));
-var GLW3_sheep=GLW3_2.updateMask(GLW3_2.gt(5));
+var GLW3_cattle=GLW3_1;//.updateMask(GLW3_1.gt(5));
+var GLW3_sheep=GLW3_2; //.updateMask(GLW3_2.gt(5));
 
 // Global forest canopy height 2005
 var dataset = ee.Image('NASA/JPL/global_forest_canopy_height_2005');
@@ -60,7 +60,6 @@ var HeightVis = {min: 0.0, max: 30.0, palette: ['ffffff', 'fcd163', '99b718', '6
 
 // Add all layers to the map
 Map.addLayer(HANPP, NPPvis, 'HANPP',false,0.5);
-Map.addLayer(copernicus_crops, copernicus_viz, "COPERNICUS Crops cover fraction",false,0.5);
 Map.addLayer(es_crops, cropVis, 'Earthstats crops',false,0.5);
 Map.addLayer(es_past, pastVis, 'Earthstats pastures',false,0.5);
 Map.addLayer(GLW3_cattle, GLWvis, 'GLW v3 cattle',false,0.5);
@@ -69,15 +68,30 @@ Map.addLayer(forestCanopyHeight, HeightVis, 'Forest Canopy Height',false,0.5);
 
 // Calculations:
 // (Pastures > Crops) & (HANPP > 0) & (Cattle > 500) 
-var A = (es_past.gt(es_crops)),
-  B = HANPP.gt(100).and(HANPP.lt(500)),
-  C = GLW3_cattle.gt(500);
+var A1 = (es_past.gt(es_crops)), // this calculation has to be done without masking
+  A2 = (es_past.subtract(es_crops)).gt(-0.1), 
+  B1 = HANPP.gt(100).and(HANPP.lt(700)),
+  B2 = HANPP.gt(80).and(HANPP.lt(840)),
+  C = GLW3_cattle.gt(500),
+  D = GLW3_sheep.gt(500);
 //var test = (es_past.gt(es_crops)).multiply(HANPP.gt(0)).multiply(GLW3_cattle.gt(500));
-var test = (A).multiply(B).multiply(C);
-Map.addLayer(A, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'past>crops',false,1.0);
-Map.addLayer(B, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'HANPP>0',true,1.0);
+var testA = (A1).multiply(B1).multiply(C);
+var testB = (A1).multiply(B1).multiply(D);
+var major = testA.add(testB).gt(0);
+
+var testA1 = (A2).multiply(B2).multiply(C);
+var testB1 = (A2).multiply(B2).multiply(D);
+var minor = testA1.add(testB1).gt(0);
+
+var masked_minor=minor.updateMask(minor.gt(0));
+var masked_major=major.updateMask(major.gt(0));
+
+//Map.addLayer(A, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'past>crops',false,1.0);
+//Map.addLayer(B, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'HANPP>0',false,1.0);
 Map.addLayer(C, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'Cattle>500',false,1.0);
-Map.addLayer(test, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'Test calc',true,1.0);
+Map.addLayer(minor, {min: 0.0, max: 1.0, palette: ['ffffff', 'yellow'] }, 'minor',true,1.0);
+Map.addLayer(masked_major, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'major',true,1.0);
 
 var HANPP_low = HANPP.lt(0);
-Map.addLayer(HANPP_low, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'low HANPP',true,1.0);
+Map.addLayer(HANPP_low, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'low HANPP',false,1.0);
+Map.addLayer(copernicus_crops, copernicus_viz, "COPERNICUS Crops cover fraction",false,0.5);
