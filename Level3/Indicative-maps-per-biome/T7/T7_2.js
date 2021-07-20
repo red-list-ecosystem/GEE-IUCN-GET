@@ -79,18 +79,28 @@ var A1 = (es_past.gt(es_crops)), // this calculation has to be done without mask
 var testA = (A1).multiply(B1).multiply(C);
 var testB = (A1).multiply(B1).multiply(D);
 var major = testA.add(testB).gt(0);
-
 var testA1 = (A2).multiply(B2).multiply(C);
 var testB1 = (A2).multiply(B2).multiply(D);
-var minor = testA1.add(testB1).gt(0);
+var minor = testA1.add(testB1).gt(0).multiply(2);
 
-var masked_minor=minor.updateMask(minor.gt(0));
-var masked_major=major.updateMask(major.gt(0));
+var combined = minor.subtract(major);
+var result=combined.updateMask(combined.gt(0));
 
 //Map.addLayer(A, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'past>crops',false,1.0);
 //Map.addLayer(B, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'HANPP>0',false,1.0);
-Map.addLayer(C, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'Cattle>500',false,1.0);
-Map.addLayer(masked_minor, {min: 0.0, max: 1.0, palette: ['ffffff', 'yellow'] }, 'minor',true,1.0);
-Map.addLayer(masked_major, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'major',true,1.0);
+//Map.addLayer(C, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'Cattle>500',false,1.0);
+Map.addLayer(result, {min: 1.0, max: 2.0, palette: ['red', 'yellow'] }, EFGname + ' new IM',true,1.0);
 
-// calculate areas
+// Create a geometry representing an export region.
+var export_region_W = ee.Geometry.Rectangle([-180, -60, 0, 80]);
+var export_region_E = ee.Geometry.Rectangle([0, -60, 180, 80]);
+
+// export map
+Export.image.toCloudStorage({image: result, description: 'T7_2_EEmap_v1', 
+  bucket: 'iucn_get_output', fileNamePrefix: 'T7_2_EEmap_v1_W',scale: 1000, 
+  region: export_region_W, maxPixels: 1e9
+});
+Export.image.toCloudStorage({image: result, description: 'T7_2_EEmap_v1', 
+  bucket: 'iucn_get_output', fileNamePrefix: 'T7_2_EEmap_v1_E',scale: 1000, 
+  region: export_region_E, maxPixels: 1e9
+});
