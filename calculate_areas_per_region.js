@@ -38,7 +38,7 @@ var areas = areaImage.reduceRegion({
     
 // flatten dictionary
 
-var classAreas = ee.List(areas.get('groups'))
+var classAreas = ee.List(areas.get('groups'));
  
 var classAreaLists = classAreas.map(function(item) {
   var areaDict = ee.Dictionary(item),
