@@ -65,6 +65,7 @@ Map.addLayer(es_past, pastVis, 'Earthstats pastures',false,0.5);
 Map.addLayer(GLW3_cattle, GLWvis, 'GLW v3 cattle',false,0.5);
 Map.addLayer(GLW3_sheep, GLWvis, 'GLW v3 sheep',false,0.5);
 Map.addLayer(forestCanopyHeight, HeightVis, 'Forest Canopy Height',false,0.5);
+Map.addLayer(copernicus_crops, copernicus_viz, "COPERNICUS Crops cover fraction",false,0.5);
 
 // Calculations:
 // (Pastures > Crops) & (HANPP > 0) & (Cattle > 500) 
@@ -92,6 +93,4 @@ Map.addLayer(C, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'Cattle>500',
 Map.addLayer(masked_minor, {min: 0.0, max: 1.0, palette: ['ffffff', 'yellow'] }, 'minor',true,1.0);
 Map.addLayer(masked_major, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'major',true,1.0);
 
-var HANPP_low = HANPP.lt(0);
-Map.addLayer(HANPP_low, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'low HANPP',false,1.0);
-Map.addLayer(copernicus_crops, copernicus_viz, "COPERNICUS Crops cover fraction",false,0.5);
+// calculate areas
