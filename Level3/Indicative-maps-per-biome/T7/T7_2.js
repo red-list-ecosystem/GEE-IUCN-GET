@@ -89,7 +89,7 @@ var masked_major=major.updateMask(major.gt(0));
 //Map.addLayer(A, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'past>crops',false,1.0);
 //Map.addLayer(B, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'HANPP>0',false,1.0);
 Map.addLayer(C, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'Cattle>500',false,1.0);
-Map.addLayer(minor, {min: 0.0, max: 1.0, palette: ['ffffff', 'yellow'] }, 'minor',true,1.0);
+Map.addLayer(masked_minor, {min: 0.0, max: 1.0, palette: ['ffffff', 'yellow'] }, 'minor',true,1.0);
 Map.addLayer(masked_major, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'major',true,1.0);
 
 var HANPP_low = HANPP.lt(0);
