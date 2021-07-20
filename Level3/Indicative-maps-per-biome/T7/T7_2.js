@@ -47,6 +47,7 @@ var forestCanopyHeight = dataset.select('1');
 
 //HANPP from Haberl et al.
 var HANPP = ee.Image('users/jrferrerparis/thirdparty/HANPP');
+// try with percentage
 
 // visualizarion parameters
 var GLWvis = {min: 0.0,max: 5000.0,palette: ['white', 'orange','brown'],};
@@ -77,3 +78,6 @@ Map.addLayer(A, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'past>crops',
 Map.addLayer(B, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'HANPP>0',true,1.0);
 Map.addLayer(C, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'Cattle>500',false,1.0);
 Map.addLayer(test, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'Test calc',true,1.0);
+
+var HANPP_low = HANPP.lt(0);
+Map.addLayer(HANPP_low, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'low HANPP',true,1.0);
