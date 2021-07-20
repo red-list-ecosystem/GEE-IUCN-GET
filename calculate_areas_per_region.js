@@ -18,7 +18,7 @@ var EFGname = 'T7.2 Sown pastures and fields';
 Map.setCenter(29.89,-2,7);
 Map.addLayer(EFG_IM,{palette:['red','yellow']},EFGname,true,0.85);
 Map.addLayer(slc, {}, 'Second Level Administrative Units',true,0.25);
- 
+
 print(EFG_IM);
 
 //from this example:
@@ -35,5 +35,19 @@ var areas = areaImage.reduceRegion({
     scale: 500,
     maxPixels: 1e10
     }); 
+    
+// flatten dictionary
+
+var classAreas = ee.List(areas.get('groups'))
  
-print(areas);
+var classAreaLists = classAreas.map(function(item) {
+  var areaDict = ee.Dictionary(item),
+  classNumber = ee.Number(areaDict.get('class')).format(),
+  area = ee.Number(
+    areaDict.get('sum')).divide(1e6).round();
+  return ee.List([classNumber, area]);
+});
+ 
+var result = ee.Dictionary(classAreaLists.flatten());
+print(result);
+ 
