@@ -11,12 +11,29 @@ print(slc)
 //dataset = dataset.style(styleParams);
 
  
-var indMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_IndMaps");
+var EFG_IM = ee.Image("users/jrferrerparis/IUCN-GET/L3_IndMaps/T7_2");
 // name of functional group
 var EFGname = 'T7.2 Sown pastures and fields';
-var EFG_IM = indMaps.filter(ee.Filter.equals("title", EFGname))
 
 Map.setCenter(29.89,-2,7);
 Map.addLayer(EFG_IM,{palette:['red','yellow']},EFGname,true,0.85);
 Map.addLayer(slc, {}, 'Second Level Administrative Units',true,0.25);
  
+print(EFG_IM);
+
+//from this example:
+//https://spatialthoughts.com/2020/06/19/calculating-area-gee/
+
+var areaImage = ee.Image.pixelArea().addBands(EFG_IM.select('occurrence_type'));
+ 
+var areas = areaImage.reduceRegion({
+      reducer: ee.Reducer.sum().group({
+      groupField: 1,
+      groupName: 'class',
+    }),
+    geometry: slc.geometry(),
+    scale: 500,
+    maxPixels: 1e10
+    }); 
+ 
+print(areas);
