@@ -69,11 +69,11 @@ Map.addLayer(forestCanopyHeight, HeightVis, 'Forest Canopy Height',false,0.5);
 // Calculations:
 // (Pastures > Crops) & (HANPP > 0) & (Cattle > 500) 
 var A = (es_past.gt(es_crops)),
-  B = HANPP.gt(0),
+  B = HANPP.gt(100).and(HANPP.lt(500)),
   C = GLW3_cattle.gt(500);
 //var test = (es_past.gt(es_crops)).multiply(HANPP.gt(0)).multiply(GLW3_cattle.gt(500));
 var test = (A).multiply(B).multiply(C);
-Map.addLayer(A, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'past>crops',true,1.0);
+Map.addLayer(A, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'past>crops',false,1.0);
 Map.addLayer(B, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'HANPP>0',true,1.0);
-Map.addLayer(C, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'Cattle>500',true,1.0);
+Map.addLayer(C, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'Cattle>500',false,1.0);
 Map.addLayer(test, {min: 0.0, max: 1.0, palette: ['ffffff', 'red'] }, 'Test calc',true,1.0);
