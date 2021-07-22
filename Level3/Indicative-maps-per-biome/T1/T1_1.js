@@ -1,5 +1,5 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var indMaps = ee.ImageCollection('users/jrferrerparis/IUCN-GET/L3_IndMaps');
+var indMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_IndMaps");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
@@ -20,3 +20,18 @@ Map.addLayer(EFG_IM, {
 }, EFGname + ' -- Indicative Map', true, 0.7);
 Map.add(title);
 Map.add(legend);
+
+
+//additional data sources
+//  Primary humid forest
+var dataset = ee.ImageCollection("UMD/GLAD/PRIMARY_HUMID_TROPICAL_FORESTS/v1");
+
+var visualization = {
+  bands: ['Primary_HT_forests'],
+  min: 0,
+  max: 255,
+  palette: ['grey','008000']
+};
+print(dataset);
+
+Map.addLayer(dataset, visualization, "Primary HT forests",false,0.5);
