@@ -93,12 +93,13 @@ Map.addLayer(dataset, {}, "COPERNICUS Land Cover",false,0.5);
 var dataset = ee.Image("COPERNICUS/Landcover/100m/Proba-V-C3/Global/2019")
 .select('urban-coverfraction'); // urban cover fraction
 
+
 var visParams = {
   min: 0.0,
   max: 100.0,
-  palette: ['000000', '448564', '70daa4', 'ffffff'],
+  palette: ['000000', '448564', '70daa4', 'red'],
 };
-Map.addLayer(dataset, visParams, "COPERNICUS Urban cover fraction",false,0.5);
+Map.addLayer(dataset.updateMask(dataset.gt(0)), visParams, "COPERNICUS Urban cover fraction",false,0.5);
 
 // ESRI 2020 landcover 10m
 var esri_lulc10 = ee.ImageCollection("projects/sat-io/open-datasets/landcover/ESRI_Global-LULC_10m");
