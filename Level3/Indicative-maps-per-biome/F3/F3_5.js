@@ -40,7 +40,16 @@ var irrigation_map = irrigation_2010.updateMask(irrigation_2010.gt(0));
 
 // +-> for individual years
 Map.addLayer(irrigation_map, {
-  palette: ['#24b297', '#1482c7'],
+  palette: ["#F6EFF7",  "#016C59"],
   min: 1, max: 2
-}, 'Density of irrigation', true, 0.5);
-print(irrigation_maps);
+}, 'Density of irrigation', false, 0.5);
+
+// Aquastat version 5.0
+var aquastat5 = ee.Image('users/jrferrerparis/thirdparty/Aquastat5');
+var aquastat5_masked = aquastat5.updateMask(aquastat5.gt(10));
+
+Map.addLayer(aquastat5_masked, {
+  palette: [ "#FFFFD4", "#FED98E", "#FE9929", "#D95F0E", "#993404"],
+  min: 0, max: 100
+}, 'Aquastat 5.0', true, 0.5);
+
