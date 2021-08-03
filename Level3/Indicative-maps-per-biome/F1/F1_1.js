@@ -20,3 +20,15 @@ Map.addLayer(EFG_IM, {
 }, EFGname + ' -- Indicative Map', true, 0.7);
 Map.add(title);
 Map.add(legend);
+
+// Alternative and complementary datasets
+// MERIT hydro
+var dataset = ee.Image("MERIT/Hydro/v1_0_1");
+
+var visualization = {
+  bands: ['viswth'],
+};
+
+Map.setCenter(90.301, 23.052, 10);
+
+Map.addLayer(dataset, visualization, "River width");
