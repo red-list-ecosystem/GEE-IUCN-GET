@@ -1,5 +1,6 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var indMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_IndMaps");
+var indMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_IndMaps"),
+    altMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_WM_nwt");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
@@ -22,6 +23,10 @@ Map.add(title);
 Map.add(legend);
 
 // Alternative data sources
+// T7.4 indicative map:
+var EFG_alt = altMaps.filter(ee.Filter.equals("title", EFGname));
+Map.addLayer(EFG_alt, {palette: ['red', 'yellow'], min: 1, max: 2
+}, 'T7.4 urban', false, 0.7);
 
 //Copernicus global landcover
 var dataset = ee.Image("COPERNICUS/Landcover/100m/Proba-V-C3/Global/2019")
@@ -68,9 +73,9 @@ Map.addLayer(forestCanopyHeight, HeightVis, 'Forest Canopy Height',false,0.5);
 Map.addLayer(copernicus_crops, copernicus_viz, "COPERNICUS Crops cover fraction",false,0.5);
 
 // Calculations:
-// (Pastures > Crops) & (HANPP > 0) & (Cattle > 500) 
+// (Pastures > Crops) & (HANPP > 0) & (Cattle > 500)
 var A1 = (es_past.gt(es_crops)), // this calculation has to be done without masking
-  A2 = (es_past.subtract(es_crops)).gt(-0.1), 
+  A2 = (es_past.subtract(es_crops)).gt(-0.1),
   B1 = HANPP.gt(100).and(HANPP.lt(700)),
   B2 = HANPP.gt(80).and(HANPP.lt(840)),
   C = GLW3_cattle.gt(500),
@@ -96,11 +101,11 @@ var export_region_W = ee.Geometry.Rectangle([-180, -60, 0, 80]);
 var export_region_E = ee.Geometry.Rectangle([0, -60, 180, 80]);
 
 // export map
-Export.image.toCloudStorage({image: result, description: 'T7_2_EEmap_v1', 
-  bucket: 'iucn_get_output', fileNamePrefix: 'T7_2_EEmap_v1_W',scale: 1000, 
+Export.image.toCloudStorage({image: result, description: 'T7_2_EEmap_v1',
+  bucket: 'iucn_get_output', fileNamePrefix: 'T7_2_EEmap_v1_W',scale: 1000,
   region: export_region_W, maxPixels: 1e9
 });
-Export.image.toCloudStorage({image: result, description: 'T7_2_EEmap_v1', 
-  bucket: 'iucn_get_output', fileNamePrefix: 'T7_2_EEmap_v1_E',scale: 1000, 
+Export.image.toCloudStorage({image: result, description: 'T7_2_EEmap_v1',
+  bucket: 'iucn_get_output', fileNamePrefix: 'T7_2_EEmap_v1_E',scale: 1000,
   region: export_region_E, maxPixels: 1e9
 });
