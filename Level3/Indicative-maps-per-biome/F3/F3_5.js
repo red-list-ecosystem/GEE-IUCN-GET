@@ -25,7 +25,7 @@ Map.add(legend);
 // Alternative data sources
 
 // T7.4 indicative map:
-var EFG_alt = altMaps.filter(ee.Filter.equals("title", EFGname));
+var EFG_alt = altMaps.filter(ee.Filter.equals("title", 'T7.4 Urban and industrial ecosystems'));
 Map.addLayer(EFG_alt, {palette: ['red', 'yellow'], min: 1, max: 2
 }, 'T7.4 urban', false, 0.7);
 
