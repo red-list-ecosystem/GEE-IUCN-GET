@@ -1,5 +1,6 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var indMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_IndMaps");
+var indMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_IndMaps"),
+    altMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_WM_nwt");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
