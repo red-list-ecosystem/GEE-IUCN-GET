@@ -21,7 +21,13 @@ Map.addLayer(EFG_IM, {
 Map.add(title);
 Map.add(legend);
 
-//
+// Alternative data sources
+
+// T7.4 indicative map:
+var EFG_alt = altMaps.filter(ee.Filter.equals("title", EFGname));
+Map.addLayer(EFG_alt, {palette: ['red', 'yellow'], min: 1, max: 2
+}, 'T7.4 urban', false, 0.7);
+
 // Global irrigation areas
 // Deepak Nagaraj, Eleanor Proust, Alberto Todeschini, Maria Cristina Rulli, Paolo D'Odorico,
 //A new dataset of global irrigation areas from 2001 to 2015, Advances in Water Resources,
