@@ -1,5 +1,5 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var indMaps = ee.ImageCollection('users/jrferrerparis/IUCN-GET/L3_IndMaps');
+var indMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_IndMaps");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
@@ -24,7 +24,7 @@ Map.add(legend);
 
 //
 // Global Aridity Index
-var aridity_index = ee.Image("projects/sat-io/open-datasets/global_ai_et0"),
+var aridity_index = ee.Image("projects/sat-io/open-datasets/global_ai_et0");
 /*
 |Aridity Index Value|Climate Class|
 |:------------------|:------------|
@@ -37,7 +37,7 @@ var aridity_index = ee.Image("projects/sat-io/open-datasets/global_ai_et0"),
 
 
 //Import palette
-var palettes = require('users/gena/packages:palettes')
+//var palettes = require('users/gena/packages:palettes')
 
 /*
 Convert back by multiplying by 10,000 [The Aridity Index values reported within the Global Aridity Index_ET0 geodataset
