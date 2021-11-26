@@ -7,7 +7,7 @@ var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
 
 // name of functional group
 var EFGname = 'T4.3 Hummock savannas';
-var EFG_IM = indMaps.filter(ee.Filter.equals("title", EFGname))
+var EFG_IM = indMaps.filter(ee.Filter.equals("title", EFGname));
 
 // create legend and title elements
 var legend=slegend.minorMajorLegend(EFGname);
