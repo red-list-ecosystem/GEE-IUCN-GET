@@ -1,6 +1,7 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var indMaps = ee.ImageCollection("users/jrferrerparis/IUCN-GET/L3_IndMaps"),
-    image = ee.Image("users/jrferrerparis/IUCN-GET/L3_WM_nwt/T1_3");
+    image = ee.Image("users/jrferrerparis/IUCN-GET/L3_WM_nwt/T1_3"),
+    image2 = ee.Image("projects/agile-tangent-319108/assets/tcf_ensemble_mnv16_2001_2018");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // load module
 var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
@@ -31,11 +32,20 @@ Map.addLayer(msked_pred, {
   bands: ['b1'],
   palette: ['white', 'purple'],
   min: 0.0001, max: 0.00077
-}, 'Cloud Forest prediction', true, 0.7);
+}, 'Cloud Forest prediction', false, 0.7);
 
 // new version 
 Map.addLayer(image, {
   bands: ['occurrence_type'],
   palette: ['red', 'yellow'],
   min: 1, max: 2
-}, EFGname + ' -- Indicative Map (new version)', true, 0.7);
+}, EFGname + ' -- Indicative Map (new version)', false, 0.7);
+
+
+var msked_tcf = image2.updateMask(image2.gte(0));
+
+Map.addLayer(msked_tcf, {
+  bands: ['b1'],
+  palette: ['white', 'purple'],
+  min: 0, max: 100
+}, 'Cloud Forest prediction', true, 0.7);
