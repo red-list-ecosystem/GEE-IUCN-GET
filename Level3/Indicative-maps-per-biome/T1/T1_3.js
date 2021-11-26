@@ -48,5 +48,5 @@ var msked_tcf = tcf_2018.updateMask(tcf_2018.gte(0));
 Map.addLayer(msked_tcf, {
   bands: ['b1'],
   palette: ['cyan', 'purple'],
-  min: 0, max: 50
+  min: 0, max: 500
 }, 'Cloud Forest prediction 2021', true, 1.0);
