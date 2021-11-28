@@ -8,8 +8,6 @@ var slegend=require("users/jrferrerparis/IUCN-GET:simple-legend.js");
 var EFGname = 'T1.1 Tropical/Subtropical lowland rainforests';
 var EFG_IM = indMaps.filter(ee.Filter.equals("title", EFGname))
 
-print(EFG_IM.get('title'));
-
 // create legend and title elements
 var legend=slegend.minorMajorLegend(EFGname);
 var title=slegend.titleLabel();
