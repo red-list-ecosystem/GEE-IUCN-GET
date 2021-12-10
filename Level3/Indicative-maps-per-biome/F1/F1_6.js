@@ -24,11 +24,11 @@ Map.add(legend);
 // Need to adapt this for freshwater ecoregions:
 
 // TEOW / RESOLVE 2017
-var ecoRegions = ee.FeatureCollection("RESOLVE/ECOREGIONS/2017");
+//var ecoRegions = ee.FeatureCollection("RESOLVE/ECOREGIONS/2017");
 
 // x-walk of ecoregion ids
-var xwalk = ee.FeatureCollection("users/jrferrerparis/IUCN-GET/xwalk_teow")
-var slc = xwalk.filter(ee.Filter.eq('efg_code','T4.2'));
+var xwalk = ee.FeatureCollection("users/jrferrerparis/IUCN-GET/xwalk_feow")
+var slc = xwalk.filter(ee.Filter.eq('efg_code','F1.6'));
 // Map the function over the features.
 var xw_major = slc.filter(ee.Filter.equals('occurrence',1)).aggregate_array('eco_id');
 var xw_minor = slc.filter(ee.Filter.equals('occurrence',2)).aggregate_array('eco_id');
@@ -41,9 +41,9 @@ print(xw_ver);
 // print(xw_ver.aggregate_array('map_code'));
 
 // filter ecoregions by the list of eco_ids
-var teow_major = ecoRegions.filter(ee.Filter.inList('ECO_ID', xw_major));
-var teow_minor = ecoRegions.filter(ee.Filter.inList('ECO_ID', xw_minor));
+//var teow_major = ecoRegions.filter(ee.Filter.inList('ECO_ID', xw_major));
+//var teow_minor = ecoRegions.filter(ee.Filter.inList('ECO_ID', xw_minor));
 
-Map.addLayer(teow_major, {color: 'red', width: 0}, 'Ecoregions with major occurrences', false, 0.5);
-Map.addLayer(teow_minor, {color: 'yellow', width: 0}, 'Ecoregions with minor occurrences', false, 0.5);
+//Map.addLayer(teow_major, {color: 'red', width: 0}, 'Ecoregions with major occurrences', false, 0.5);
+//Map.addLayer(teow_minor, {color: 'yellow', width: 0}, 'Ecoregions with minor occurrences', false, 0.5);
 
