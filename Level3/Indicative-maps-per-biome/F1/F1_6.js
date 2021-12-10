@@ -54,13 +54,27 @@ var result=combined.updateMask(combined.gt(0));
 
 Map.addLayer(result, {min: 1.0, max: 2.0, palette: ['red', 'yellow'] }, EFGname + ' new IM',false,1.0);
 
-var export_region = ee.Geometry.Rectangle([-180, -60, 180, 80]);
 
-Export.image.toAsset({image: result, description: 'F1_6_EEmap_v1',
-  assetId: 'users/jrferrerparis/IUCN-GET/L3_WM_nwt/F1_6', 
-  pyramidingPolicy: 'mode', scale: 1000,
-  region: export_region, maxPixels: 1e9
+// Create a geometry representing an export region.
+var export_region_W = ee.Geometry.Rectangle([-180, -60, 0, 80]);
+var export_region_E = ee.Geometry.Rectangle([0, -60, 180, 80]);
+
+// export map
+Export.image.toCloudStorage({image: result, description: 'F1_6_EEmap_v1W',
+  bucket: 'iucn_get_output', fileNamePrefix: 'F1_6_EEmap_v1_W',scale: 1000,
+  region: export_region_W, maxPixels: 1e9
 });
+Export.image.toCloudStorage({image: result, description: 'F1_6_EEmap_v1E',
+  bucket: 'iucn_get_output', fileNamePrefix: 'F1_6_EEmap_v1_E',scale: 1000,
+  region: export_region_E, maxPixels: 1e9
+});
+//var export_region = ee.Geometry.Rectangle([-179.9, -60, 179, 80]);
+
+//Export.image.toAsset({image: result, description: 'F1_6_EEmap_v1',
+//  assetId: 'users/jrferrerparis/IUCN-GET/L3_WM_nwt/F1_6', 
+//  pyramidingPolicy: 'mode', scale: 1000,
+//  region: export_region, maxPixels: 1e9
+//});
 
 
 // Need to adapt this for freshwater ecoregions:
