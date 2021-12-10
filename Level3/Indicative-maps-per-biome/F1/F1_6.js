@@ -17,7 +17,7 @@ Map.addLayer(EFG_IM, {
   bands: ['occurrence_type'],
   palette: ['red', 'yellow'],
   min: 1, max: 2
-}, EFGname + ' -- Indicative Map', true, 0.7);
+}, EFGname + ' -- Indicative Map', false, 0.7);
 Map.add(title);
 Map.add(legend);
 
@@ -47,13 +47,14 @@ print(EFG_IM);
 var A0 = EFG_IM.select('occurrence_type');
 var A1 = (A0.gt(0));
 //var test = (es_past.gt(es_crops)).multiply(HANPP.gt(0)).multiply(GLW3_cattle.gt(500));
-var major = (A1).multiply(rivers.gt(1)).multiply(seasonal.gt(1));
-var minor = (A1).multiply(rivers.gt(1)).multiply(2);
+var major = (A1).multiply(rivers.gt(0)).multiply(seasonal.gt(1));
+var minor = (A1).multiply(rivers.gt(0)).multiply(2);
 var combined = minor.subtract(major);
 var result=combined.updateMask(combined.gt(0));
 
-Map.addLayer(A1, {palette: ['red'] }, 'a1',true,0.7);
+//Map.addLayer(A1, {palette: ['red'] }, 'a1',true,0.7);
 Map.addLayer(minor, {min: 1.0, max: 2.0, palette: ['red', 'yellow'] }, 'minor',true,.7);
+Map.addLayer(major, {min: 1.0, max: 2.0, palette: ['red', 'yellow'] }, 'minor',true,.7);
 
 Map.addLayer(result, {min: 1.0, max: 2.0, palette: ['red', 'yellow'] }, EFGname + ' new IM',false,1.0);
 
