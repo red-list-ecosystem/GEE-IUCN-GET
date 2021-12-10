@@ -21,6 +21,22 @@ Map.addLayer(EFG_IM, {
 Map.add(title);
 Map.add(legend);
 
+
+// Global surface water
+
+var gsw = ee.Image('JRC/GSW1_3/GlobalSurfaceWater');
+var transition = gsw.select('transition');
+var ephemeral = transition.updateMask(transition.gt(8));
+var seasonal = transition.updateMask(transition.eq(4).or(transition.eq(5)).or(transition.eq(8)));
+//var seasonal = transition.updateMask(transition.eq(4,5,8]));
+//var seasonal = transition.updateMask(transition.eq(4,5,8]));
+
+// need to filter for values > 7?
+Map.addLayer({
+  eeObject: seasonal,
+  name: 'Ephemeral water (1984-2015)',
+});
+
 // Need to adapt this for freshwater ecoregions:
 
 // TEOW / RESOLVE 2017
