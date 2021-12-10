@@ -54,7 +54,7 @@ var result=combined.updateMask(combined.gt(0));
 
 Map.addLayer(result, {min: 1.0, max: 2.0, palette: ['red', 'yellow'] }, EFGname + ' new IM',false,1.0);
 
-var export_region = ee.Geometry.Rectangle([-180, -90, 180, 90]);
+var export_region = ee.Geometry.Rectangle([-180, -60, 180, 80]);
 
 Export.image.toAsset({image: result, description: 'F1_6_EEmap_v1',
   assetId: 'users/jrferrerparis/IUCN-GET/L3_WM_nwt/F1_6', 
