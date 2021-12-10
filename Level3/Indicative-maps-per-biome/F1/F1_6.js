@@ -44,20 +44,23 @@ Map.addLayer(rivers, rivviz, "River width",false);
 // (selected FEOW) * rivers -> minor
 print(EFG_IM);
 
-var A0 = EFG_IM.select('occurrence_type');
-var A1 = (A0.gt(0));
+var A1 = EFG_IM.select('occurrence_type').gt(0);
+var B1 = seasonal.gt(0);
 //var test = (es_past.gt(es_crops)).multiply(HANPP.gt(0)).multiply(GLW3_cattle.gt(500));
-var major = (A1).multiply(rivers.gt(0)).multiply(seasonal.gt(1));
+var major = (A1).multiply(rivers.gt(0)).multiply(B1);
 var minor = (A1).multiply(rivers.gt(0)).multiply(2);
-var combined = minor.subtract(major);
+var combined = minor.subtract(major.unmask());
 var result=combined.updateMask(combined.gt(0));
-
-//Map.addLayer(A1, {palette: ['red'] }, 'a1',true,0.7);
-Map.addLayer(minor, {min: 1.0, max: 2.0, palette: ['red', 'yellow'] }, 'minor',true,.7);
-Map.addLayer(major, {min: 1.0, max: 2.0, palette: ['red', 'yellow'] }, 'minor',true,.7);
 
 Map.addLayer(result, {min: 1.0, max: 2.0, palette: ['red', 'yellow'] }, EFGname + ' new IM',false,1.0);
 
+var export_region = ee.Geometry.Rectangle([-180, -90, 180, 90]);
+
+Export.image.toAsset({image: result, description: 'F1_6_EEmap_v1',
+  assetId: 'users/jrferrerparis/IUCN-GET/L3_WM_nwt/F1_6', 
+  pyramidingPolicy: 'mode', scale: 1000,
+  region: export_region, maxPixels: 1e9
+});
 
 
 // Need to adapt this for freshwater ecoregions:
