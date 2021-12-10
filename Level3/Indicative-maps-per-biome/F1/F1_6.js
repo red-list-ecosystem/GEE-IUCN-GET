@@ -26,16 +26,22 @@ Map.add(legend);
 
 var gsw = ee.Image('JRC/GSW1_3/GlobalSurfaceWater');
 var transition = gsw.select('transition');
-var ephemeral = transition.updateMask(transition.gt(8));
+//var ephemeral = transition.updateMask(transition.gt(8));
 var seasonal = transition.updateMask(transition.eq(4).or(transition.eq(5)).or(transition.eq(8)));
-//var seasonal = transition.updateMask(transition.eq(4,5,8]));
-//var seasonal = transition.updateMask(transition.eq(4,5,8]));
 
-// need to filter for values > 7?
 Map.addLayer({
   eeObject: seasonal,
   name: 'Ephemeral water (1984-2015)',
 });
+
+
+// MERIT hydro riverwidth
+var dataset = ee.Image("MERIT/Hydro/v1_0_1");
+var rivwidth = dataset.select('viswth');
+var rivers = rivwidth.updateMask(rivwidth.gt(0));
+var rivviz = {min:0,max:100,palette:['blue','black']};
+Map.addLayer(rivers, rivviz, "River width",false);
+
 
 // Need to adapt this for freshwater ecoregions:
 
@@ -62,4 +68,16 @@ print(xw_ver);
 
 //Map.addLayer(teow_major, {color: 'red', width: 0}, 'Ecoregions with major occurrences', false, 0.5);
 //Map.addLayer(teow_minor, {color: 'yellow', width: 0}, 'Ecoregions with minor occurrences', false, 0.5);
+
+
+// Calculations:
+// (selected FEOW) * rivers * ephemeral) -> major
+// (selected FEOW) * rivers -> minor
+var A1 = (EFG_IM.select('occurrence_type').gt(0));
+//var test = (es_past.gt(es_crops)).multiply(HANPP.gt(0)).multiply(GLW3_cattle.gt(500));
+var major = (A1).multiply(rivers.gt(1)).multiply(seasonal.gt(1));
+var minor = (A1).multiply(rivers.gt(1)).multiply(2);
+var combined = minor.subtract(major);
+var result=combined.updateMask(combined.gt(0));
+Map.addLayer(result, {min: 1.0, max: 2.0, palette: ['red', 'yellow'] }, EFGname + ' new IM',true,1.0);
 
