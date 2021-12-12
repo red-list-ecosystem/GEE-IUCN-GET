@@ -29,6 +29,8 @@ var ephemeral = transition.updateMask(transition.eq(10));
 //var ephemeral = transition.updateMask(transition.eq(9).or(transition.eq(10)));
 var seasonal = transition.updateMask(transition.eq(4).or(transition.eq(5)).or(transition.eq(8)));
 
+
+
 Map.addLayer({eeObject: seasonal,name: 'Seasonal water occurrence (1984-2015)',});
 Map.addLayer({eeObject: ephemeral,name: 'Ephemeral water occurrence (1984-2015)',});
 
@@ -89,6 +91,15 @@ Export.image.toCloudStorage({image: result, description: 'TF1_5_EEmap_v1E',
   bucket: 'iucn_get_output', fileNamePrefix: 'TF1_5_EEmap_v1_E',scale: 1000,
   region: export_region_E, maxPixels: 1e9
 });
+
+var water=gsw.select('occurrence');
+var ephemeral=water.updateMask(water.gt(0).and(water.lt(25)));
+var visualization = {
+  min: 0.0,
+  max: 25.0,
+  palette: ['ffffff', 'ffbbbb', '0000ff']
+};
+Map.addLayer(ephemeral, visualization, 'Occurrence');
 
 
 //var export_region = ee.Geometry.Rectangle([-179.9, -60, 179, 80]);
