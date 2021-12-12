@@ -59,16 +59,16 @@ var export_region_E = ee.Geometry.Rectangle([0, -60, 180, 80]);
 
 // export map
 
-<!--//
-Export.image.toCloudStorage({image: result, description: 'F1_6_EEmap_v1W',
-  bucket: 'iucn_get_output', fileNamePrefix: 'F1_6_EEmap_v1_W',scale: 1000,
-  region: export_region_W, maxPixels: 1e9
-});
-Export.image.toCloudStorage({image: result, description: 'F1_6_EEmap_v1E',
-  bucket: 'iucn_get_output', fileNamePrefix: 'F1_6_EEmap_v1_E',scale: 1000,
-  region: export_region_E, maxPixels: 1e9
-});
-//-->
+
+// Export.image.toCloudStorage({image: result, description: 'F1_6_EEmap_v1W',
+//   bucket: 'iucn_get_output', fileNamePrefix: 'F1_6_EEmap_v1_W',scale: 1000,
+//   region: export_region_W, maxPixels: 1e9
+// });
+// Export.image.toCloudStorage({image: result, description: 'F1_6_EEmap_v1E',
+//   bucket: 'iucn_get_output', fileNamePrefix: 'F1_6_EEmap_v1_E',scale: 1000,
+//   region: export_region_E, maxPixels: 1e9
+// });
+
 
 var major = (A1).multiply(B1);
 var minor = (A1).multiply(2);
