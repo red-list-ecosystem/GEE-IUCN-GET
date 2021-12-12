@@ -25,7 +25,7 @@ Map.add(legend);
 
 var gsw = ee.Image('JRC/GSW1_3/GlobalSurfaceWater');
 var transition = gsw.select('transition');
-//var ephemeral = transition.updateMask(transition.gt(8));
+var ephemeral = transition.updateMask(transition.gt(8));
 var seasonal = transition.updateMask(transition.eq(4).or(transition.eq(5)).or(transition.eq(8)));
 
 //Map.addLayer({eeObject: seasonal,name: 'Seasonal water occurrence (1984-2015)',});
@@ -69,6 +69,7 @@ var export_region_E = ee.Geometry.Rectangle([0, -60, 180, 80]);
 //   region: export_region_E, maxPixels: 1e9
 // });
 
+var B1 = ephemeral.gt(0);
 
 var major = (A1).multiply(B1);
 var minor = (A1).multiply(2);
