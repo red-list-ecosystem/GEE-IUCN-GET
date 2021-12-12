@@ -25,10 +25,12 @@ Map.add(legend);
 
 var gsw = ee.Image('JRC/GSW1_3/GlobalSurfaceWater');
 var transition = gsw.select('transition');
-var ephemeral = transition.updateMask(transition.gt(8));
+var ephemeral = transition.updateMask(transition.eq(10));
+//var ephemeral = transition.updateMask(transition.eq(9).or(transition.eq(10)));
 var seasonal = transition.updateMask(transition.eq(4).or(transition.eq(5)).or(transition.eq(8)));
 
-//Map.addLayer({eeObject: seasonal,name: 'Seasonal water occurrence (1984-2015)',});
+Map.addLayer({eeObject: seasonal,name: 'Seasonal water occurrence (1984-2015)',});
+Map.addLayer({eeObject: ephemeral,name: 'Ephemeral water occurrence (1984-2015)',});
 
 // MERIT hydro riverwidth
 var dataset = ee.Image("MERIT/Hydro/v1_0_1");
