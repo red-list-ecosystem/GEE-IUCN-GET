@@ -76,7 +76,7 @@ var minor = (A1).multiply(2);
 var combined = minor.subtract(major.unmask());
 var result=combined.updateMask(combined.gt(0));
 
-Map.addLayer(result, {min: 1.0, max: 2.0, palette: ['red', 'yellow'] }, 'TF1.5 new IM',false,1.0);
+Map.addLayer(result, {min: 1.0, max: 2.0, palette: ['red', 'yellow'] }, 'TF1.5 new IM',true,0.7);
 
 // export map
 Export.image.toCloudStorage({image: result, description: 'TF1_5_EEmap_v1W',
