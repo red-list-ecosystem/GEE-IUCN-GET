@@ -8,8 +8,6 @@ Users with access to the repository can add it to the Code Editor using:
 https://code.earthengine.google.com/?accept_repo=users/jrferrerparis/IUCN-GET
 ```
 
-https://doi.org/10.5281/zenodo.3546513
-
 This code is part of the publication:
 > Keith DA, Ferrer-Paris JR, Nicholson E, Kingsford RT (Eds.) (2020) 'The IUCN Global Ecosystem Typology v2.0: Descriptive profiles for Biomes and Ecosystem Functional Groups'. The International Union for the Conservation of Nature (IUCN), Gland. DOI:10.2305/IUCN.CH.2020.13.en.
 
