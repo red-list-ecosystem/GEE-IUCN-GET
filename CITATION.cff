@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+authors:
+  - family-names: "Ferrer-Paris"
+    given-names: "José R."
+    orcid: https://orcid.org/0000-0002-9554-3395
+title: "Indicative distribution maps for Ecosystem Functional Groups - Level 3 of IUCN Global Ecosystem Typology - Earth Engine Code"
+type: software
+message: If you use this software, please cite both the report from preferred-citation and the dataset itself.
+preferred-citation:
+  authors:
+    - family-names: Keith
+      given-names: David A.
+      affiliation: UNSW
+    - family-names: Ferrer-Paris
+      given-names: José R.
+      affiliation: UNSW
+    - family-names: Nicholson
+      given-names: Emily
+    - family-names: Kingsford
+      given-names: Richard T.
+  title: The IUCN Global Ecosystem Typology v2.0 - Descriptive profiles for Biomes and Ecosystem Functional Groups
+  doi: 10.2305/IUCN.CH.2020.13.en
+references:
+   authors:
+    - family-names: Keith
+      given-names: David A.
+      affiliation: UNSW
+    - family-names: Ferrer-Paris
+      given-names: José R.
+      affiliation: UNSW
+    - family-names: Nicholson
+      given-names: Emily
+    - family-names: Kingsford
+      given-names: Richard T.
+   title: Indicative distribution maps for Ecosystem Functional Groups - Level 3 of IUCN Global Ecosystem Typology (2.1.1)
+   doi: 10.5281/zenodo.5090419
+   type: dataset
